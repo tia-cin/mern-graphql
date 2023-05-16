@@ -16,9 +16,6 @@ dist
 # Log files
 *.log
 
-# Build output of TypeScript
-*.js
-*.js.map
 
 # Dependency lock files
 yarn.lock
