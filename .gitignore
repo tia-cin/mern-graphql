@@ -1,0 +1,36 @@
+# Node.js dependencies
+node_modules
+
+# Compiled output
+dist
+
+# Environment variables
+.env
+
+# IDE/Editor specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Log files
+*.log
+
+# Build output of TypeScript
+*.js
+*.js.map
+
+# Dependency lock files
+yarn.lock
+package-lock.json
+
+# IDE/Editor configuration files
+/.eslintcache
+/.env.production.local
+
+# Testing specific files
+/coverage/
+
+# Misc
+.DS_Store
+Thumbs.db
