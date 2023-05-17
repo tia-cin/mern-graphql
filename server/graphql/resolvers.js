@@ -4,9 +4,9 @@ import Task from "../models/Task.js";
 export const resolvers = {
   Query: {
     getAllProjects: async () => await Project.find(),
-    getProject: async (_, { _id }) => await Project.find(_id),
+    getProject: async (_, { _id }) => await Project.findById(_id),
     getAllTasks: async () => await Task.find(),
-    getTask: async (_, { _id }) => await Task.find(_id),
+    getTask: async (_, { _id }) => await Task.findById(_id),
   },
 
   Mutation: {
