@@ -2,7 +2,7 @@ import Project from "../models/Project.js";
 
 export const resolvers = {
   Query: {
-    hello: () => "hello!",
+    getAllProjects: async () => await Project.find(),
   },
 
   Mutation: {
