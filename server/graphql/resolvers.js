@@ -20,6 +20,9 @@ export const resolvers = {
     },
     createTask: async (_, args) => {
       try {
+        const taskProject = Project.findById(args.projectId);
+        if (!taskProject) throw new Error("Project not found");
+
         const newTask = new Task(args);
         await newTask.save();
 
