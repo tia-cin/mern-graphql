@@ -43,5 +43,15 @@ export const resolvers = {
       if (!deletedTask) throw new Error("Task not found");
       return deletedTask;
     },
+    updateProject: async (_, args) => {
+      const updatedProject = await Project.findByIdAndUpdate(args._id, args);
+      if (updatedProject) throw new Error("Project not found");
+      return updatedProject;
+    },
+    updateTask: async (_, args) => {
+      const updatedTask = await Task.findByIdAndUpdate(args._id, args);
+      if (updatedTask) throw new Error("Task not found");
+      return updatedTask;
+    },
   },
 };
