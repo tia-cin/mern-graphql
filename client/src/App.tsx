@@ -1,10 +1,22 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { Projects } from "./pages";
+
+const client = new ApolloClient({
+  uri: "http://localhost:3000/graphql",
+  cache: new InMemoryCache(),
+});
 
 const App: React.FC = () => {
   return (
-    <div className="bg-soft-white">
-      <h1 className="bold">HEllo</h1>
-    </div>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/projects" element={<Projects />} />
+        </Routes>
+      </BrowserRouter>
+    </ApolloProvider>
   );
 };
 
