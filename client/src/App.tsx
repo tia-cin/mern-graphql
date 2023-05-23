@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { Projects } from "./pages";
+import { ProjectDetail, Projects } from "./pages";
 
 const client = new ApolloClient({
   uri: "http://localhost:3000/graphql",
@@ -14,6 +14,7 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:id" element={<ProjectDetail />} />
         </Routes>
       </BrowserRouter>
     </ApolloProvider>
