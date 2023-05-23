@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { ProjectDetail, Projects } from "./pages";
 
@@ -13,6 +13,7 @@ const App: React.FC = () => {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Navigate to="/projects" />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
         </Routes>
