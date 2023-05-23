@@ -30,8 +30,18 @@ export const resolvers = {
 
         return newTask;
       } catch (error) {
-        console.log(">> Error while creating Task");
+        console.log(">> Error while creating Task", error);
       }
+    },
+    deleteProject: async (_, { _id }) => {
+      const deletedProject = await Project.findByIdAndDelete(_id);
+      if (!deletedProject) throw new Error("Project not Found");
+      return deletedProject;
+    },
+    deleteTask: async (_, { _id }) => {
+      const deletedTask = await Task.findByIdAndDelete(_id);
+      if (!deletedTask) throw new Error("Task not found");
+      return deletedTask;
     },
   },
 };
