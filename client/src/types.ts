@@ -14,3 +14,8 @@ export interface Project {
   updatedAt: string;
   tasks: Task[];
 }
+
+export interface CardProps {
+  name: string;
+  description: string;
+}
