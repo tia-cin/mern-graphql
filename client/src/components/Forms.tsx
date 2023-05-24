@@ -2,7 +2,9 @@ import { FC, useState, ChangeEvent, FormEvent } from "react";
 import { ProjectType } from "../types";
 import { useMutation } from "@apollo/client";
 import { CREATE_PROJECT, GET_PROJECTS } from "../graphql/projects";
-import { Error } from ".";
+import { Error, Loading } from ".";
+import { CREATE_TASK } from "../graphql/tasks";
+import { useParams } from "react-router-dom";
 
 export const ProjectForm: FC = () => {
   const [project, setProject] = useState<ProjectType>({
@@ -55,13 +57,35 @@ export const ProjectForm: FC = () => {
 };
 
 export const TaskForm: FC = () => {
+  const { id } = useParams();
+  const [title, setTitle] = useState<string>("");
+
+  const [createTask, { loading, error }] = useMutation(CREATE_TASK, {
+    refetchQueries: [{ query: GET_PROJECTS }],
+  });
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    createTask({
+      variables: {
+        title: title,
+        projectId: id,
+      },
+    });
+    setTitle("");
   };
+
+  if (loading) return <Loading />;
+  if (error) return <Error message={error.message} />;
+
   return (
-    <form>
-      <input type="text" name="title" />
-      <button>Add</button>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="title"
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <button type="submit">Add</button>
     </form>
   );
 };

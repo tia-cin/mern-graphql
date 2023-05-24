@@ -16,6 +16,7 @@ export const TaskCard: FC<TaskType> = ({ title }) => {
   return (
     <div>
       <h4>{title}</h4>
+      <button>Delete</button>
     </div>
   );
 };
