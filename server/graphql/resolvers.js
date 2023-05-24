@@ -1,5 +1,7 @@
 import Project from "../models/Project.js";
 import Task from "../models/Task.js";
+import User from "../models/User.js";
+import bcrypt from "bcrypt";
 
 export const resolvers = {
   Query: {
@@ -7,6 +9,8 @@ export const resolvers = {
     getProject: async (_, { _id }) => await Project.findById(_id),
     getAllTasks: async () => await Task.find(),
     getTask: async (_, { _id }) => await Task.findById(_id),
+    getAllUsers: async () => await User.find(),
+    getUser: async (_, { _id }) => await User.findById(_id),
   },
 
   Mutation: {
@@ -54,13 +58,78 @@ export const resolvers = {
       if (updatedTask) throw new Error("Task not found");
       return updatedTask;
     },
+    createUser: async (_, args) => {
+      try {
+        const newUser = new User(args);
+        await newUser.save();
+        return newUser;
+      } catch (error) {
+        console.log(">> Error while creating user", error);
+      }
+    },
+    signup: async (_, args) => {
+      try {
+        const user = await User.findOne({ email: args.email });
+
+        if (user)
+          throw new Error(
+            "User with this email already exists, please use another one"
+          );
+
+        const hashedPwd = await bcrypt.hash(args.password, 10);
+        const newUser = new User({ ...args, password: hashedPwd });
+        await newUser.save();
+
+        return newUser;
+      } catch (error) {
+        console.log(">> Error while sign up");
+      }
+    },
+    login: async (_, args) => {
+      try {
+        const user = await User.findOne({ email: args.email });
+
+        if (!user) throw new Error("Invalid email");
+
+        const isPwdValid = await bcrypt.compare(args.password, user.password);
+
+        if (!isPwdValid) throw new Error("Invalid password");
+
+        return user;
+      } catch (error) {
+        console.log(">> Error while log in");
+      }
+    },
+    deleteAccount: async (_, args, context) => {
+      try {
+        if (args.userId) throw new Error("User not authenticated");
+
+        const user = await User.findById(args.userId);
+        if (!user) throw new Error("User not found");
+
+        const isPwdValid = await bcrypt.compare(args.password, user.password);
+        if (!isPwdValid) throw new Error("Invalid password");
+
+        await user.delete();
+        return user;
+      } catch (error) {
+        console.log(">> Error while deleting account");
+      }
+    },
   },
 
   Project: {
     tasks: async (parent) => await Task.find({ projectId: parent._id }),
+    owner: async (parent) => await User.findById(parent._id),
   },
 
   Task: {
     project: async (parent) => await Project.findById(parent.projectId),
+    assignedTo: async (parent) => await User.findById(parent._id),
+  },
+
+  User: {
+    projects: async (parent) => await Project.find({ owner: parent._id }),
+    tasks: async (parent) => await Task.find({ assignedTo: parent._id }),
   },
 };
