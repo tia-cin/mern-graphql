@@ -1,11 +1,11 @@
 import { FC, useState, ChangeEvent, FormEvent } from "react";
-import { ProjectTypes } from "../types";
+import { ProjectType } from "../types";
 import { useMutation } from "@apollo/client";
 import { CREATE_PROJECT, GET_PROJECTS } from "../graphql/projects";
 import { Error } from ".";
 
-const Form: FC = () => {
-  const [project, setProject] = useState<ProjectTypes>({
+export const ProjectForm: FC = () => {
+  const [project, setProject] = useState<ProjectType>({
     name: "",
     description: "",
   });
@@ -54,4 +54,14 @@ const Form: FC = () => {
   );
 };
 
-export default Form;
+export const TaskForm: FC = () => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+  return (
+    <form>
+      <input type="text" name="title" />
+      <button>Add</button>
+    </form>
+  );
+};

@@ -29,3 +29,21 @@ export const CREATE_PROJECT = gql`
     }
   }
 `;
+
+export const GET_PROJECT = gql`
+  query ($id: ID!) {
+    getProject(_id: $id) {
+      _id
+      name
+      description
+      createdAt
+      updatedAt
+      tasks {
+        _id
+        title
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;

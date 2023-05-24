@@ -1,11 +1,11 @@
 import React from "react";
-import { Form, List } from "../components";
+import { ProjectForm, ProjectList } from "../components";
 
 const Projects: React.FC = () => {
   return (
     <div>
-      <Form />
-      <List />
+      <ProjectForm />
+      <ProjectList />
     </div>
   );
 };
