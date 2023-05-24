@@ -15,7 +15,7 @@ export interface Project {
   tasks: Task[];
 }
 
-export interface CardProps {
+export interface ProjectTypes {
   name: string;
   description: string;
 }

@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { CardProps } from "../types";
+import { ProjectTypes } from "../types";
 
-const Card: FC<CardProps> = ({ name, description }) => {
+const Card: FC<ProjectTypes> = ({ name, description }) => {
   return (
     <div>
       <h2>{name}</h2>
