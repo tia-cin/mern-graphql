@@ -2,6 +2,7 @@ import Project from "../models/Project.js";
 import Task from "../models/Task.js";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
+import { generateToken, hashPwd, comparePwds } from "../auth.js";
 
 export const resolvers = {
   Query: {
@@ -76,11 +77,12 @@ export const resolvers = {
             "User with this email already exists, please use another one"
           );
 
-        const hashedPwd = await bcrypt.hash(args.password, 10);
+        const hashedPwd = await hashPwd(args.password, 10);
         const newUser = new User({ ...args, password: hashedPwd });
         await newUser.save();
 
-        return newUser;
+        const token = generateToken({ userId: newUser._id });
+        return { ...newUser, token };
       } catch (error) {
         console.log(">> Error while sign up");
       }
@@ -91,11 +93,12 @@ export const resolvers = {
 
         if (!user) throw new Error("Invalid email");
 
-        const isPwdValid = await bcrypt.compare(args.password, user.password);
+        const isPwdValid = await comparePwds(args.password, user.password);
 
         if (!isPwdValid) throw new Error("Invalid password");
 
-        return user;
+        const token = generateToken({ userId: user._id });
+        return { user, token };
       } catch (error) {
         console.log(">> Error while log in");
       }
