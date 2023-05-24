@@ -105,9 +105,9 @@ export const resolvers = {
     },
     deleteAccount: async (_, args, context) => {
       try {
-        if (args.userId) throw new Error("User not authenticated");
+        if (context.userId) throw new Error("User not authenticated");
 
-        const user = await User.findById(args.userId);
+        const user = await User.findById(context.userId);
         if (!user) throw new Error("User not found");
 
         const isPwdValid = await bcrypt.compare(args.password, user.password);
