@@ -15,12 +15,20 @@ const ProjectDetail: FC = () => {
   if (error) return <Error message={error.message} />;
 
   return (
-    <div>
-      <h1>{data.getProject.name}</h1>
-      <p>{data.getProject.description}</p>
-      <button>Delete</button>
-      <TaskForm />
-      <TaskList tasks={data.getProject.tasks} />
+    <div className="mx-auto">
+      <h1 className="text-2xl font-bold mb-4">{data.getProject.name}</h1>
+      <p className="text-dark-gray mb-4">{data.getProject.description}</p>
+      <button className="bg-red-500 text-white px-4 py-2 rounded">
+        Delete
+      </button>
+      <div className="mt-8">
+        <h2 className="text-xl font-bold-mb-4">Add Task</h2>
+        <TaskForm />
+      </div>
+      <div className="mt-8">
+        <h2 className="text-xl font-bold mb-4">Tasks</h2>
+        <TaskList tasks={data.getProject.tasks} />
+      </div>
     </div>
   );
 };

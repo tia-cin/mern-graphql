@@ -11,7 +11,7 @@ export const ProjectList: FC = () => {
   if (error) return <Error message={error.message} />;
 
   return (
-    <div>
+    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {data.getAllProjects?.map((p: ProjectType) => (
         <ProjectCard key={p._id} {...p} />
       ))}
@@ -21,7 +21,7 @@ export const ProjectList: FC = () => {
 
 export const TaskList: FC<{ tasks: TaskType[] }> = ({ tasks }) => {
   return (
-    <div>
+    <div className="space-y-4">
       {tasks.map((t) => (
         <TaskCard key={t._id} {...t} />
       ))}

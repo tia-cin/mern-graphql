@@ -18,7 +18,7 @@ export interface ProjectType {
   updatedAt?: string;
   status: string;
   tasks?: TaskType[];
-  owner: UserType;
+  owner: string;
   members: UserType[];
   dueDate: string;
 }

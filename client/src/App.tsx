@@ -10,15 +10,17 @@ const client = new ApolloClient({
 
 const App: React.FC = () => {
   return (
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/projects" />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:id" element={<ProjectDetail />} />
-        </Routes>
-      </BrowserRouter>
-    </ApolloProvider>
+    <div className="bg-gray-100 min-h-screen p-10">
+      <ApolloProvider client={client}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Navigate to="/projects" />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:id" element={<ProjectDetail />} />
+          </Routes>
+        </BrowserRouter>
+      </ApolloProvider>
+    </div>
   );
 };
 

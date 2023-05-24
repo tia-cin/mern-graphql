@@ -10,6 +10,10 @@ export const ProjectForm: FC = () => {
   const [project, setProject] = useState<ProjectType>({
     name: "",
     description: "",
+    dueDate: "",
+    members: [],
+    owner: "",
+    status: "",
   });
 
   const [createProject, { loading, error }] = useMutation(CREATE_PROJECT, {
@@ -32,21 +36,27 @@ export const ProjectForm: FC = () => {
     });
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      className="my-4 flex md:flex-col md:justify-between items-center jus"
+      onSubmit={handleSubmit}
+    >
       {error && <Error message={error.message} />}
       <input
+        className="border w-full border-light-gray rouded p-2 mb-2"
         type="text"
         name="name"
         placeholder="Type a name"
         onChange={handleChange}
       />
       <textarea
+        className="border w-full border-light-gray rounded p-2 mb-2"
         onChange={handleChange}
         name="description"
         rows={3}
         placeholder="Type a description"
       ></textarea>
       <button
+        className="bg-primary-blue text-white px-4 py-2 rouded disabled:opacity-50"
         type="submit"
         disabled={!project.name || !project.description || loading}
       >
@@ -79,13 +89,19 @@ export const TaskForm: FC = () => {
   if (error) return <Error message={error.message} />;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="my-4" onSubmit={handleSubmit}>
       <input
+        className="border border-light-gray rounded p-2 mr-2"
         type="text"
         name="title"
         onChange={(e) => setTitle(e.target.value)}
       />
-      <button type="submit">Add</button>
+      <button
+        className="bg-primary-blue text-white px-4 py-2 rounded"
+        type="submit"
+      >
+        Add
+      </button>
     </form>
   );
 };
