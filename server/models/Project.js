@@ -4,8 +4,13 @@ const projectSchema = new Schema(
   {
     name: { type: String, required: true },
     description: { type: String },
-    // createdBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    // id: { type: Schema.Types.ObjectId, default: mongoose.Types.ObjectId },
+    status: {
+      type: String,
+      enum: ["in progress", "completed", "on hold", "not started"],
+    },
+    owner: { type: Schema.Types.ObjectId, ref: "User" },
+    members: [{ type: Schema.Types.ObjectId, ref: "USer" }],
+    dueDate: { type: Date },
   },
   { timestamps: true }
 );
