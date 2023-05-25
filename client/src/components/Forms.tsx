@@ -140,17 +140,42 @@ export const SignIn: FC = () => {
     });
   };
   return (
-    <div>
-      <h2>Signup</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Name" onChange={handleChange} />
-        <input type="email" placeholder="Email" onChange={handleChange} />
-        <input type="password" placeholder="Password" onChange={handleChange} />
-        <button type="submit">Signup</button>
-      </form>
-      <p>
-        Already a user? <Link to="/login">Log In</Link>
-      </p>
+    <div className="flex items-center justify-center h-screen">
+      <div className="max-w-sm mx-auto bg-white rounded shadow-lg p-6">
+        <h2 className="text-2xl font-bold mb-4">Signup</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            placeholder="Name"
+            onChange={handleChange}
+            className="w-full border border-gray-300 px-4 py-2 rounded"
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={handleChange}
+            className="w-full border border-gray-300 px-4 py-2 rounded"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={handleChange}
+            className="w-full border border-gray-300 px-4 py-2 rounded"
+          />
+          <button
+            type="submit"
+            className="w-full bg-primary-blue text-white font-bold py-2 rounded hover:bg-medium-blue transition-colors duration-300"
+          >
+            Signup
+          </button>
+        </form>
+        <p className="text-center mt-4">
+          Already a user?{" "}
+          <Link to="/login" className="text-primary-blue font-bold">
+            Log In
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };
@@ -178,16 +203,36 @@ export const LogIn: FC = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" onChange={handleChenge} />
-        <input type="password" placeholder="Password" onChange={handleChenge} />
-        <button type="submit">Login</button>
-      </form>
-      <p>
-        Don't have an account? <Link to="/signin">Log In</Link>
-      </p>
+    <div className="flex items-center justify-center h-screen">
+      <div className="max-w-sm mx-auto bg-white rounded shadow-lg p-6">
+        <h2 className="text-2xl font-bold mb-4">Login</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={handleChenge}
+            className="w-full border border-gray-300 px-4 py-2 rounded"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={handleChenge}
+            className="w-full border border-gray-300 px-4 py-2 rounded"
+          />
+          <button
+            type="submit"
+            className="w-full bg-primary-blue text-white font-bold py-2 rounded hover:bg-medium-blue transition-colors duration-300"
+          >
+            Login
+          </button>
+        </form>
+        <p className="text-center mt-4">
+          Don't have an account?{" "}
+          <Link to="/signin" className="text-primary-blue font-bold">
+            Sign In
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };
