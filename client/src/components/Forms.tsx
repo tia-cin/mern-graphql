@@ -102,3 +102,54 @@ export const TaskForm: FC = () => {
     </form>
   );
 };
+
+export const SignIn: FC = () => {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUser((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  return (
+    <div>
+      <h2>Signup</h2>
+      <form>
+        <input type="text" placeholder="Name" onChange={handleChange} />
+        <input type="email" placeholder="Email" onChange={handleChange} />
+        <input type="password" placeholder="Password" onChange={handleChange} />
+        <button type="submit">Signup</button>
+      </form>
+    </div>
+  );
+};
+
+export const LogIn: FC = () => {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChenge = (e: ChangeEvent<HTMLInputElement>) => {
+    setUser((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  return (
+    <div>
+      <h2>Login</h2>
+      <form>
+        <input type="email" placeholder="Email" onChange={handleChenge} />
+        <input type="password" placeholder="Password" onChange={handleChenge} />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
+};
