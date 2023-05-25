@@ -12,9 +12,9 @@ const client = new ApolloClient({
 const App: React.FC = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
-      <Navbar isAuthenticated={false} />
       <ApolloProvider client={client}>
         <BrowserRouter>
+          <Navbar isAuthenticated={false} />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/signin" element={<SignIn />} />

@@ -7,33 +7,55 @@ const Navbar: FC<{ isAuthenticated: boolean; user?: UserType }> = ({
   user,
 }) => {
   const handleLogout = () => {};
+
   return (
-    <nav>
-      <ul>
+    <nav className="bg-primary-blue py-4 px-6 fixed top-0 w-full">
+      <ul className="flex items-center justify-between">
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/" className="text-white text-lg font-bold">
+            Home
+          </Link>
         </li>
         {!isAuthenticated || !user ? (
-          <>
+          <ul className="flex items-center space-x-4">
             <li>
-              <Link to="/login">Login</Link>
+              <Link
+                to="/login"
+                className="text-white hover:text-soft-white transition-colors duration-300"
+              >
+                Login
+              </Link>
             </li>
             <li>
-              <Link to="/signin">Signin</Link>
+              <Link
+                to="/signin"
+                className="text-white hover:text-soft-white transition-colors duration-300"
+              >
+                Signin
+              </Link>
             </li>
-          </>
+          </ul>
         ) : (
-          <>
+          <ul className="flex items-center space-x-4">
             <li>
-              <img src={user.image} alt="User" />
+              <img
+                src={user.image}
+                alt="User"
+                className="w-8 h-8 rounded-full"
+              />
             </li>
             <li>
-              <span>{user.name}</span>
+              <span className="text-white">{user.name}</span>
             </li>
             <li>
-              <button onClick={handleLogout}>Logout</button>
+              <button
+                onClick={handleLogout}
+                className="text-white hover:text-light-red transition-colors duration-300"
+              >
+                Logout
+              </button>
             </li>
-          </>
+          </ul>
         )}
       </ul>
     </nav>
