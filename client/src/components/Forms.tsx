@@ -5,6 +5,7 @@ import { CREATE_PROJECT, GET_PROJECTS } from "../graphql/projects";
 import { Error, Loading } from ".";
 import { CREATE_TASK } from "../graphql/tasks";
 import { useParams } from "react-router-dom";
+import { CREATE_USER, LOG_IN, SIGN_IN } from "../graphql/users";
 
 export const ProjectForm: FC = () => {
   const [project, setProject] = useState<ProjectType>({
@@ -110,16 +111,38 @@ export const SignIn: FC = () => {
     password: "",
   });
 
+  const [createUser] = useMutation(CREATE_USER);
+  const [signin] = useMutation(SIGN_IN);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    createUser({
+      variables: {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+      },
+    });
+
+    signin({
+      variables: {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+      },
+    });
+  };
   return (
     <div>
       <h2>Signup</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Name" onChange={handleChange} />
         <input type="email" placeholder="Email" onChange={handleChange} />
         <input type="password" placeholder="Password" onChange={handleChange} />
@@ -135,6 +158,15 @@ export const LogIn: FC = () => {
     password: "",
   });
 
+  const [login] = useMutation(LOG_IN);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    login({
+      variables: { email: user.email, password: user.password },
+    });
+  };
+
   const handleChenge = (e: ChangeEvent<HTMLInputElement>) => {
     setUser((prev) => ({
       ...prev,
@@ -145,7 +177,7 @@ export const LogIn: FC = () => {
   return (
     <div>
       <h2>Login</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input type="email" placeholder="Email" onChange={handleChenge} />
         <input type="password" placeholder="Password" onChange={handleChenge} />
         <button type="submit">Login</button>
