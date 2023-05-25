@@ -30,6 +30,7 @@ export interface UserType {
   role: string;
   projects: ProjectType[];
   tasks: TaskType[];
+  image: string;
   createdAt?: string;
   updatedAt?: string;
 }
