@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { Landing, ProjectDetail, Projects } from "./pages";
-import { LogIn, SignIn } from "./components";
+import { LogIn, Navbar, SignIn } from "./components";
 
 const client = new ApolloClient({
   uri: "http://localhost:3000/graphql",
@@ -12,6 +12,7 @@ const client = new ApolloClient({
 const App: React.FC = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
+      <Navbar isAuthenticated={false} />
       <ApolloProvider client={client}>
         <BrowserRouter>
           <Routes>

@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/client";
 import { CREATE_PROJECT, GET_PROJECTS } from "../graphql/projects";
 import { Error, Loading } from ".";
 import { CREATE_TASK } from "../graphql/tasks";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { CREATE_USER, LOG_IN, SIGN_IN } from "../graphql/users";
 
 export const ProjectForm: FC = () => {
@@ -148,6 +148,9 @@ export const SignIn: FC = () => {
         <input type="password" placeholder="Password" onChange={handleChange} />
         <button type="submit">Signup</button>
       </form>
+      <p>
+        Already a user? <Link to="/login">Log In</Link>
+      </p>
     </div>
   );
 };
@@ -182,6 +185,9 @@ export const LogIn: FC = () => {
         <input type="password" placeholder="Password" onChange={handleChenge} />
         <button type="submit">Login</button>
       </form>
+      <p>
+        Don't have an account? <Link to="/signin">Log In</Link>
+      </p>
     </div>
   );
 };

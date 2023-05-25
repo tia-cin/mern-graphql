@@ -34,3 +34,8 @@ export interface UserType {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface AuthState {
+  isAuthenticated: boolean;
+  user: UserType | null;
+}
