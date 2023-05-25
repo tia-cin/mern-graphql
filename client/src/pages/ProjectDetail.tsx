@@ -18,7 +18,7 @@ const ProjectDetail: FC = () => {
     <div className="mx-auto">
       <h1 className="text-2xl font-bold mb-4">{data.getProject.name}</h1>
       <p className="text-dark-gray mb-4">{data.getProject.description}</p>
-      <button className="bg-red-500 text-white px-4 py-2 rounded">
+      <button className="bg-light-red text-white px-4 py-2 rounded">
         Delete
       </button>
       <div className="mt-8">

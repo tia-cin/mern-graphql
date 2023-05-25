@@ -36,10 +36,7 @@ export const ProjectForm: FC = () => {
     });
   };
   return (
-    <form
-      className="my-4 flex md:flex-col md:justify-between items-center jus"
-      onSubmit={handleSubmit}
-    >
+    <form className="my-4 grid grid-cols-1" onSubmit={handleSubmit}>
       {error && <Error message={error.message} />}
       <input
         className="border w-full border-light-gray rouded p-2 mb-2"

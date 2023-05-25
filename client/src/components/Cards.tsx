@@ -16,7 +16,7 @@ export const ProjectCard: FC<ProjectType> = ({
   const navigate = useNavigate();
   return (
     <div
-      className="cursor-pointer bg-pale-blue rouded-lg shadow-md p-4"
+      className="cursor-pointer bg-pale-blue rounded-lg shadow-md p-4"
       onClick={() => navigate(`/projects/${_id}`)}
     >
       <h2 className="text-primary-blue text-lg font-semibold mb-2">{name}</h2>

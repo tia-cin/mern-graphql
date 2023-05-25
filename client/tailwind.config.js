@@ -12,6 +12,7 @@ export default {
       "light-gray": "#CCCCCC",
       "dark-gray": "#666666",
       "soft-black": "#333333",
+      "light-red": "#FF6666",
     },
     extend: {},
   },
