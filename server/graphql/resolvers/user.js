@@ -1,6 +1,7 @@
-import User from "../../models/User";
-import { generateToken, hashPwd, comparePwds } from "../../auth.js";
+import User from "../../models/User.js";
 import bcrypt from "bcrypt";
+import { generateToken, hashPwd, comparePwds } from "../../auth.js";
+import { ApolloError } from "apollo-server-errors";
 
 export const UserResolvers = {
   Query: {
@@ -9,31 +10,24 @@ export const UserResolvers = {
   },
 
   Mutation: {
-    registerUser: async (_, { registerInput: { name, email, password } }) => {},
-    createUser: async (_, args) => {
+    registerUser: async (_, { registerInput: { name, email, password } }) => {
       try {
-        const newUser = new User(args);
-        await newUser.save();
-        return newUser;
-      } catch (error) {
-        console.log(">> Error while creating user", error);
-      }
-    },
-    signup: async (_, args) => {
-      try {
-        const user = await User.findOne({ email: args.email });
+        const user = await User.findOne({ email });
 
         if (user)
-          throw new Error(
-            "User with this email already exists, please use another one"
+          throw new ApolloError(
+            "User with this email already exists, please use another one",
+            "EMAIL_ALREADY_EXISTS"
           );
 
-        const hashedPwd = await hashPwd(args.password, 10);
-        const newUser = new User({ ...args, password: hashedPwd });
-        await newUser.save();
+        const hashedPwd = await hashPwd(password);
+        const newUser = new User({ name, email, password: hashedPwd });
 
-        const token = generateToken({ userId: newUser._id });
-        return { ...newUser, token };
+        const token = generateToken({ userId: newUser._id, email });
+        newUser.token = token;
+
+        await newUser.save();
+        return newUser;
       } catch (error) {
         console.log(">> Error while sign up");
       }
@@ -42,11 +36,12 @@ export const UserResolvers = {
       try {
         const user = await User.findOne({ email: args.email });
 
-        if (!user) throw new Error("Invalid email");
+        if (!user) throw new ApolloError("Invalid email", "INVALID_EMAIL");
 
         const isPwdValid = await comparePwds(args.password, user.password);
 
-        if (!isPwdValid) throw new Error("Invalid password");
+        if (!isPwdValid)
+          throw new ApolloError("Invalid password", "INVALID_PASSWORD");
 
         const token = generateToken({ userId: user._id });
         return { user, token };
@@ -56,13 +51,18 @@ export const UserResolvers = {
     },
     deleteAccount: async (_, args, context) => {
       try {
-        if (context.userId) throw new Error("User not authenticated");
+        if (context.userId)
+          throw new ApolloError(
+            "User not authenticated",
+            "USER_NOT_AUTHENTICATED"
+          );
 
         const user = await User.findById(context.userId);
-        if (!user) throw new Error("User not found");
+        if (!user) throw new ApolloError("User not found", "USER_NOT_FOUND");
 
         const isPwdValid = await bcrypt.compare(args.password, user.password);
-        if (!isPwdValid) throw new Error("Invalid password");
+        if (!isPwdValid)
+          throw new ApolloError("Invalid password", "INVALID_PASSWORD");
 
         await user.delete();
         return user;
