@@ -3,6 +3,7 @@ import Task from "../models/Task.js";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import { generateToken, hashPwd, comparePwds } from "../auth.js";
+import Message from "../models/Message.js";
 
 export const resolvers = {
   Query: {
@@ -12,6 +13,7 @@ export const resolvers = {
     getTask: async (_, { _id }) => await Task.findById(_id),
     getAllUsers: async () => await User.find(),
     getUser: async (_, { _id }) => await User.findById(_id),
+    message: (_, { _id }) => Message.findById(_id),
   },
 
   Mutation: {
@@ -118,6 +120,11 @@ export const resolvers = {
       } catch (error) {
         console.log(">> Error while deleting account");
       }
+    },
+    createMessage: async (_, { messageInput: { text, user } }) => {
+      const newMessage = new Message({ text, createdBy: user });
+      await newMessage.save();
+      return newMessage;
     },
   },
 
