@@ -58,6 +58,7 @@ export const typeDefs = gql`
 
   type Message {
     text: String
+    createdBy: User
     createdAt: String
     updatedAt: String
   }
