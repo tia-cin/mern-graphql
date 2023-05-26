@@ -6,12 +6,13 @@ const userImg =
 const userSchema = new Schema(
   {
     name: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, requered: true },
     projects: [{ type: Schema.Types.ObjectId, ref: "Project" }],
     tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
     image: { type: String, default: userImg },
+    token: { type: String },
   },
   { timestamps: true }
 );

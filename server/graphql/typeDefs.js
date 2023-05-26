@@ -8,6 +8,7 @@ export const typeDefs = gql`
     getTask(_id: ID!): Task
     getAllUsers: [User]
     getUser(_id: ID!): User
+    message(id: ID!): Message
   }
 
   type Mutation {
@@ -21,6 +22,7 @@ export const typeDefs = gql`
     signup(name: String, email: String, password: String): User
     login(email: String, password: String): User
     deleteAccount(password: String): User
+    createMessage(messageInput: MessageInput): Message!
   }
 
   type Project {
@@ -50,5 +52,16 @@ export const typeDefs = gql`
     role: String
     projects: [Project]
     tasks: [Task]
+  }
+
+  type Message {
+    text: String
+    createdAt: String
+    updatedAt: String
+  }
+
+  input MessageInput {
+    text: String
+    user: String
   }
 `;
