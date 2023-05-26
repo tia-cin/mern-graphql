@@ -32,9 +32,9 @@ export const UserResolvers = {
         console.log(">> Error while sign up");
       }
     },
-    login: async (_, { loginInput: email, password }) => {
+    login: async (_, { loginInput: { email, password } }) => {
       try {
-        const user = await User.findOne({ email: email });
+        const user = await User.findOne({ email });
         const isPwdValid = await comparePwds(password, user.password);
 
         if (!user) throw new ApolloError("Invalid email", "INVALID_EMAIL");
@@ -45,7 +45,7 @@ export const UserResolvers = {
         user.token = token;
         return user;
       } catch (error) {
-        console.log(">> Error while log in");
+        console.log(">> Error while log in", error);
       }
     },
     deleteAccount: async (_, args, context) => {

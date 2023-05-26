@@ -9,6 +9,25 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+// const auth = (context) => {
+//   const authHeader = context.req.headers.authorization;
+
+//   if (authHeader) {
+//     const token = authHeader.split("Bearer")[1];
+
+//     if (token) {
+//       try {
+//         const user = jwt.verify(token, secret);
+//         return user;
+//       } catch (error) {
+//         throw new AuthenticationError("Invalid/Expired Token");
+//       }
+//     }
+//     throw new Error("Authentication token must be 'Bearer' type");
+//   }
+//   throw new Error("Authorization header must be provided");
+// };
+
 const App: React.FC = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
