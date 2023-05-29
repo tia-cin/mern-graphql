@@ -46,7 +46,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   }
 };
 
-const AuthProvider: FC = (props) => {
+const AuthProvider: any = (props: any) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   const login = (userData: LoginInput) => {
