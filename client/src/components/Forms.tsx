@@ -125,9 +125,9 @@ export const Register: FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(registerUser({ variables: { registerUser: user } }));
+    console.log(user, data);
 
-    registerUser({ variables: { registerUser: user } });
+    registerUser({ variables: { registerInput: user } });
     context.login(data?.registerUser);
     navigate("/");
   };

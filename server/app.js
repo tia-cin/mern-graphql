@@ -16,7 +16,7 @@ export const startServer = async (typeDefs, resolvers) => {
 
   app.use(
     "/graphql",
-    cors({ allowedHeaders: ["Authorization"] }),
+    cors({ allowedHeaders: "*" }),
     express.json(),
     expressMiddleware(server)
   );
