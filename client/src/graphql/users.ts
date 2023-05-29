@@ -1,16 +1,11 @@
 import { gql } from "@apollo/client";
 
-export const CREATE_USER = gql`
-  mutation ($registerInput: RegisterInput) {
+export const REGISTER = gql`
+  mutation ($registerInput: RegisterInput!) {
     registerUser(registerInput: $registerInput) {
-      _id
-      name
       email
+      password
       token
-      role
-      image
-      createdAt
-      updatedAt
     }
   }
 `;

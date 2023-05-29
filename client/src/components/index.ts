@@ -1,5 +1,5 @@
 import { ProjectList, TaskList } from "./Lists";
-import { ProjectForm, TaskForm, LogIn, SignIn } from "./Forms";
+import { ProjectForm, TaskForm, LogIn, Register } from "./Forms";
 import Loading from "./Loading";
 import Error from "./Error";
 import { ProjectCard, TaskCard } from "./Cards";
@@ -15,6 +15,6 @@ export {
   ProjectCard,
   TaskCard,
   LogIn,
-  SignIn,
+  Register,
   Navbar,
 };

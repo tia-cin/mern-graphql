@@ -28,10 +28,10 @@ const Navbar: FC<{ isAuthenticated: boolean; user?: UserType }> = ({
             </li>
             <li>
               <Link
-                to="/signin"
+                to="/register"
                 className="text-white hover:text-soft-white transition-colors duration-300"
               >
-                Signin
+                Register
               </Link>
             </li>
           </ul>

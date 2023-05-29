@@ -13,7 +13,14 @@ export const startServer = async (typeDefs, resolvers) => {
   });
 
   await server.start();
-  app.use("/graphql", cors(), express.json(), expressMiddleware(server));
+
+  app.use(
+    "/graphql",
+    cors({ allowedHeaders: ["Authorization"] }),
+    express.json(),
+    expressMiddleware(server)
+  );
+
   app.get("/", (req, res) => res.redirect("/graphql"));
 
   await new Promise((res) => httpServer.listen({ port: 3000 }, res));
