@@ -1,3 +1,8 @@
+export enum ActionOptions {
+  LOGIN = "LOGIN",
+  LOGOUT = "LOGOUT",
+}
+
 export interface TaskType {
   _id?: string;
   title: string;
@@ -35,7 +40,29 @@ export interface UserType {
   updatedAt?: string;
 }
 
+export interface RegisterInput {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginInput {
+  email: string;
+  password: string;
+  token: string;
+}
+
 export interface AuthState {
-  isAuthenticated: boolean;
   user: UserType | null;
+}
+
+export interface AuthAction {
+  type: ActionOptions;
+  payload?: UserType | LoginInput;
+}
+
+export interface ContextType {
+  user: UserType | null;
+  login: (userData: LoginInput) => void;
+  logout: () => void;
 }
