@@ -1,32 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 import { Landing, ProjectDetail, Projects } from "./pages";
 import { LogIn, Navbar, SignIn } from "./components";
-
-const client = new ApolloClient({
-  uri: "http://localhost:3000/graphql",
-  cache: new InMemoryCache(),
-});
-
-// const auth = (context) => {
-//   const authHeader = context.req.headers.authorization;
-
-//   if (authHeader) {
-//     const token = authHeader.split("Bearer")[1];
-
-//     if (token) {
-//       try {
-//         const user = jwt.verify(token, secret);
-//         return user;
-//       } catch (error) {
-//         throw new AuthenticationError("Invalid/Expired Token");
-//       }
-//     }
-//     throw new Error("Authentication token must be 'Bearer' type");
-//   }
-//   throw new Error("Authorization header must be provided");
-// };
+import client from "./apollo";
 
 const App: React.FC = () => {
   return (

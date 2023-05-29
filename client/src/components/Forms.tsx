@@ -5,7 +5,7 @@ import { CREATE_PROJECT, GET_PROJECTS } from "../graphql/projects";
 import { Error, Loading } from ".";
 import { CREATE_TASK } from "../graphql/tasks";
 import { Link, useParams } from "react-router-dom";
-import { CREATE_USER, LOG_IN, SIGN_IN } from "../graphql/users";
+import { CREATE_USER, LOG_IN } from "../graphql/users";
 
 export const ProjectForm: FC = () => {
   const [project, setProject] = useState<ProjectType>({
@@ -112,7 +112,6 @@ export const SignIn: FC = () => {
   });
 
   const [createUser] = useMutation(CREATE_USER);
-  const [signin] = useMutation(SIGN_IN);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser((prev) => ({
@@ -124,14 +123,6 @@ export const SignIn: FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     createUser({
-      variables: {
-        name: user.name,
-        email: user.email,
-        password: user.password,
-      },
-    });
-
-    signin({
       variables: {
         name: user.name,
         email: user.email,
