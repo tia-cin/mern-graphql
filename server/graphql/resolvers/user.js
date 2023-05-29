@@ -10,7 +10,7 @@ export const UserResolvers = {
   },
 
   Mutation: {
-    registerUser: async (_, { registerInput: { name, email, password } }) => {
+    registerUser: async (_, { name, email, password }) => {
       try {
         const user = await User.findOne({ email });
 

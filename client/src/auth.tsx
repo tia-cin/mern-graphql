@@ -1,4 +1,4 @@
-import { createContext, useReducer, FC } from "react";
+import { createContext, useReducer } from "react";
 import jwtDecode from "jwt-decode";
 import {
   UserType,

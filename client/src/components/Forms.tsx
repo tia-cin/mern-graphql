@@ -127,7 +127,7 @@ export const Register: FC = () => {
     e.preventDefault();
     console.log(user, data);
 
-    registerUser({ variables: { registerInput: user } });
+    registerUser({ variables: user });
     context.login(data?.registerUser);
     navigate("/");
   };
